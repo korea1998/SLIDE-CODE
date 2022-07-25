@@ -1,0 +1,225 @@
+ //html
+ 
+ <div class="slide">
+      <div class="picture">
+        <div><a href=""><img src="img/02_image_slide_1.jpg" alt="친절하게 작성해주세요"></a></div>
+        <div><a href=""><img src="img/02_image_slide_2.jpg" alt="친절하게 작성해주세요"></a></div>
+        <div><a href=""><img src="img/02_image_slide_3.jpg" alt="친절하게 작성해주세요"></a></div>
+        <div><a href=""><img src="img/02_image_slide_4.jpg" alt="친절하게 작성해주세요"></a></div>
+        <div><a href=""><img src="img/02_image_slide_5.jpg" alt="친절하게 작성해주세요"></a></div>
+      </div>
+      <div>
+          <div class="prev"><img src="img/button.png" alt="이전 버튼"></div>
+          <div class="next"><img src="img/button.png" alt="다음 버튼"></div>
+      </div>
+     <div class="btn">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+     </div>
+</div>
+
+
+//css
+.slide {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    /*.prev와 .next의 기준*/
+
+}
+.slide img {
+    width: 100%;
+}
+.picture {
+    width: 500%;
+    position: relative;
+
+}
+.picture > div {
+    width: 20%;
+    float: left;
+
+
+}
+/*** 이전&다음 버튼 ***/
+.prev,.next {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: calc(50% - 30px / 2);
+    cursor: pointer;
+    background-color: red;
+}
+.prev {
+    left: 30px;
+}
+.prev img {
+    transform: rotate(90deg);
+}
+.next {
+    right: 30px;
+}
+.next img {
+    transform: rotate(-90deg);
+}
+
+
+
+
+
+.btn {
+    position: absolute;
+    width: calc(20px * 5 + 25px * 4);
+    height: 20px;
+    left: calc(50% - ((20px * 5 + 20px * 4) / 2));
+    bottom: 20px;
+    z-index: 10;
+}
+.btn > div {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    float: left;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+}
+div.check {
+    background-color: aqua;
+}
+
+
+
+//js
+// 첫 번째 체크버튼에 배경색 지정
+$('.btn>div').eq(0).addClass('check');
+
+// 변수 설정
+var number = 0; //순번
+var position = 0; //위치
+
+
+// 자동 전환
+/*
+자동실행함수로 li 1컷의 전체 시간 설정
+1. number는 1씩 증가
+2. 만약 number가 4보다 커지면 number는 다시 0
+3. number를 이용하여 position의 값이 0%/-100%/-200%/-300%/-400%로 바뀌도록 계산식 작성
+4. .slide>ul에 animate를 적용하여 css를 left:position로 설정 (실행시간은 0.5초)
+4.의 재귀함수 - .btn>li에 check클래스 제거 number번째 li만 check클래스 추가
+(재귀함수는 함수를 실행완료 후에 실행)
+*/
+setInterval(function () {
+  number++;
+  if (number > 4) 
+  { 
+    number = 0;
+    position = -1 * number * 100 + '%';
+  }
+  $('.slide_img').animate({left: position}, 500, function () {
+  $('.btn>div').removeClass('check').eq(number).addClass('check');
+  });}, 5000);
+
+//setInterval(function(){
+//    number++;
+//    if(number>4) number = 0;
+//    position = -1 * number * 100 + '%';
+//    $(.img).animate({
+//        left:position
+//    },500, function(){
+//        $('.btn>div').removeClass('check').eq(number).addClass('check');
+//    });
+//}, 5000);
+
+// 이전&다음 버튼
+/*
+.next 클릭하면
+1. number는 1씩 증가
+2. 만약 number가 4보다 커지면 number는 다시 0
+3. number를 이용하여 position의 값이 0%/-100%/-200%/-300%/-400%로 바뀌도록 계산식 작성
+4. .slide>ul에 animate를 적용하여 css를 left:position로 설정 (실행시간은 0.5초)
+4.의 재귀함수 - .btn>li에 check클래스 제거 number번째 li만 check클래스 추가
+(재귀함수는 함수를 실행완료 후에 실행)
+*/
+//$('.next').click(function () {
+//  number++;
+//  if (number > 4) number = 0;
+//  position = -1 * number * 100 + '%';
+//  $('.slide_img').animate({
+//    left: position
+//  }, 500, function () {
+//    $('.btn>div').removeClass('check').eq(number).addClass('check');
+//  });
+//});
+
+$('.next').click(function(){
+    number++;
+    if  (number > 4)
+    {
+      number = 0;
+      position = -1 * number * 100 + '%';
+    }
+    $('.slide_img').animate({
+        left:position}, 500, function (){
+        $('.btn>div').removeClass('check').eq(number).addClass('check');});});
+
+/*
+.prev 클릭하면
+1. number는 1씩 감소
+2. 만약 number가 0보다 작아지면 number는 다시 4
+3. number를 이용하여 position의 값이 0%/-100%/-200%/-300%/-400%로 바뀌도록 계산식 작성
+4. .slide>ul에 animate를 적용하여 css를 left:position로 설정 (실행시간은 0.5초)
+4.의 재귀함수 - .btn>li에 check클래스 제거 number번째 li만 check클래스 추가
+(재귀함수는 함수를 실행완료 후에 실행)
+*/
+//$('.prev').click(function () {
+//  number--;
+//  if (number < 0) number = 4;
+//  position = -1 * number * 100 + '%';
+//  $('.slide_img').animate({
+//    left: position
+//  }, 500, function () {
+//    $('.btn>li').removeClass('check').eq(number).addClass('check');
+//  });
+//});
+
+$('.prev').click(function(){
+    number--;
+    if(number < 0)number = 4;
+    position = -1 * number * 100 + '%';
+    $('.slide_img').animate({
+        left:position
+    },500, function(){
+        $('.btn>div').removeClass('check').eq(number).addClass('check');
+    });
+});
+
+// 체크 버튼
+/*
+.btn>li 클릭하면
+1. 클릭한 li의 순번을 number에 넣어줌
+2. .btn>li에 check클래스 제거 number번째 li만 check클래스 추가
+3. number를 이용하여 position의 값이 0%/-100%/-200%/-300%/-400%로 바뀌도록 계산식 작성
+4. .slide>ul에 animate를 적용하여 css를 left:position로 설정 (실행시간은 0.5초)
+*/
+$('.btn>').click(function () {
+  number = $(this).index();
+  $('.btn>div').removeClass('check').eq(number).addClass('check');
+  position = -1 * number * 100 + '%';
+  $('.slide>.slide_img').animate({
+    left: position
+  }, 500);
+});
+
+
+//$('.btn>li').click(function(){
+//    number = $(this).index();
+//    $('.btn>li').removeClass('check').eq(number).addClass('check');
+//    position = -1 * number * 100 + '%';
+//    $('.img').animate({
+//        left: position
+//    },500);
+//});
