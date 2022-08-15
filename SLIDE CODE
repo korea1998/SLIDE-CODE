@@ -1,49 +1,73 @@
  //html
  
- <div class="slide">
-      <div class="picture">
-        <div><a href=""><img src="img/02_image_slide_1.jpg" alt="친절하게 작성해주세요"></a></div>
-        <div><a href=""><img src="img/02_image_slide_2.jpg" alt="친절하게 작성해주세요"></a></div>
-        <div><a href=""><img src="img/02_image_slide_3.jpg" alt="친절하게 작성해주세요"></a></div>
-        <div><a href=""><img src="img/02_image_slide_4.jpg" alt="친절하게 작성해주세요"></a></div>
-        <div><a href=""><img src="img/02_image_slide_5.jpg" alt="친절하게 작성해주세요"></a></div>
-      </div>
-      <div>
-          <div class="prev"><img src="img/button.png" alt="이전 버튼"></div>
-          <div class="next"><img src="img/button.png" alt="다음 버튼"></div>
-      </div>
-     <div class="btn">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-     </div>
+<div class="slide">
+    <div class="imgs">
+        <div><img src="imgs/1.jpg" alt=""></div>
+        <div><img src="imgs/2.jpg" alt=""></div>
+        <div><img src="imgs/3.jpg" alt=""></div>
+    </div>
+
+    <div class="button">
+        <div class="button_left"><img src="imgs/left.png" alt=""></div>
+        <div class="button_right"><img src="imgs/left.png" alt=""></div>
+    </div>
+
+    <div class="imgnation">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 
 
 //css
-.slide {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    /*.prev와 .next의 기준*/
+.slide{
 
 }
-.slide img {
-    width: 100%;
+.imgs{
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
 }
-.picture {
-    width: 500%;
-    position: relative;
+.imgs img{
+  width: 1800px;
+  height: 500px;
+}
+.button{
 
 }
-.picture > div {
-    width: 20%;
-    float: left;
-
-
+.button_left{
+  position: absolute;
+  top: 200px;
+  left: 200px;
 }
+.button_right{
+  position: absolute;
+  top: 200px;
+  right: 200px;
+  transform: rotate(180deg);
+}
+.imgnation{
+  width: 500px;
+  height: 100px;
+  display: inline-table;
+  vertical-align: middle;
+  position: absolute;
+  z-index: 2;
+  top: 380px;
+  left: calc(50% - (20px * 5 + 20px * 4) / 2);
+}
+.imgnation div{
+  width: 100px;
+  height: 100px;
+  display: inline-table;
+  vertical-align: middle;
+  margin: 0 10px 0 0;
+  background-color: wheat;
+}
+
+
 /*** 이전&다음 버튼 ***/
 .prev,.next {
     position: absolute;
